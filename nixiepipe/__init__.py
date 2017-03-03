@@ -1,1 +1,1 @@
-from nixiepipe import pipe
+from .nixiepipe import pipe

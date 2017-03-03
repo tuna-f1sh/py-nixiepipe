@@ -49,8 +49,8 @@ def _findPipePort():
         raise RuntimeError('No Nixie Pipe Master module detected!')
     elif len(ports) > 1:
         for x in range(len(ports)):
-            print x, ":", ports[x][0]
-        idx = int(raw_input("Which Nixie Pipe Master port? Enter list number\n> "))
+            print(x, ":", ports[x][0])
+        idx = int(input("Which Nixie Pipe Master port? Enter list number\n> "))
         return ports[idx][0]
     else:
         return ports[0][0]
@@ -157,7 +157,7 @@ class pipe:
         # Send connect
         version = self.connect()
         if version >= 0:
-            print 'Connected to Nixie Pipe version ' + str(version)
+            print('Connected to Nixie Pipe version ' + str(version))
         else:
             self.close()
             raise RuntimeError('Could not connect to Nixie Pipe!')
@@ -183,9 +183,9 @@ class pipe:
             packet[2] = message
 
         if self.debug:
-            print packet
+            print(packet)
         # write packet
-	packet = bytearray(packet)
+        packet = bytearray(packet)
         self.ser.write(packet)
 
     def _getResponce(self, length):
@@ -200,7 +200,7 @@ class pipe:
         res = list(bytearray(res))
 
         if self.debug:
-            print res
+            print(res)
         
         return res
 

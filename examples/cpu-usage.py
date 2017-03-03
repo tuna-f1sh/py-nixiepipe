@@ -7,7 +7,7 @@ import psutil
 
 # catch ctrl-c to gracefully close
 def sigint_handler(signum, frame):
-    print 'Ctrl-C detected, closing port...'
+    print('Ctrl-C detected, closing port...')
     pipe.close()
     sys.exit()
 

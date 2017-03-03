@@ -35,13 +35,13 @@ class RepeatedTimer(object):
 
 # catch ctrl-c to gracefully close
 def sigint_handler(signum, frame):
-    print 'Ctrl-C detected, closing port...'
+    print('Ctrl-C detected, closing port...')
     pipes.close()
     weatherTask.stop()
     sys.exit()
 
 def updateweather():
-    print 'Weather update'
+    print('Weather update')
     # Search for current weather in London (UK)
     observation = owm.weather_at_place('Bristol,uk')
     global w
@@ -63,7 +63,7 @@ pipes.setNumberUnits(1)
 pipes.setPipeColour(0,255,128,0)
 
 while (True):
-    print w.get_detailed_status()
+    print(w.get_detailed_status())
     pipes.setWeather(0,w.get_weather_icon_name())
     pipes.setNumber(w.get_temperature('celsius')['temp'])
     pipes.show()
