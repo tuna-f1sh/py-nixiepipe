@@ -185,6 +185,7 @@ class pipe:
         if self.debug:
             print packet
         # write packet
+	packet = bytearray(packet)
         self.ser.write(packet)
 
     def _getResponce(self, length):
