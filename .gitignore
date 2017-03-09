@@ -1,5 +1,6 @@
 supporting/
 website/
+*.ini
 
 # Output folders
 Gerber/

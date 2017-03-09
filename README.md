@@ -7,6 +7,7 @@ Master hardware.
 
 * [pyserial](https://github.com/pyserial/pyserial).
 * Nixie Pipe Master running [np-serial](https://github.com/tuna-f1sh/NixiePipe/tree/master/firmware/np-serial) firmware.
+* _pyowm_, _configparser_, _threading_ _to use example scripts_.
 
 ## Install
 
@@ -36,3 +37,15 @@ pipe.show()
   Weather Map.
 * **cpu-usage.py**: Display CPU usage.
 * **stock-ticker.py**: Display stock symbols. Pass symbols as arguments.
+
+### Weather Example API Key Config File
+
+You will need an API key for the Open Weather Map module. I have used
+_configparser_ to save my API key outside the repo. To use the `weather.py`
+you will need to **create a file 'owm-api.ini'** in the 'examples/' directory
+with the contents:
+
+```
+[API]
+OpenWeatherMap = YOUR_API_KEY
+```
