@@ -46,6 +46,9 @@ def _findPipePort():
 
     ports = list(list_ports.grep("Nixie Pipe"))
     if len(ports) < 1:
+        ports = list(list_ports.grep("403:6015")) # fall back to FTDI VID/PID
+
+    if len(ports) < 1:
         raise RuntimeError('No Nixie Pipe Master module detected!')
     elif len(ports) > 1:
         for x in range(len(ports)):
