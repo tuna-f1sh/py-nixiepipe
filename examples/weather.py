@@ -4,8 +4,16 @@ import signal
 import nixiepipe
 import threading
 import pyowm
+import configparser
 
-owm = pyowm.OWM('b58b4a4f5a654884d357ffa44443dac3')  # You MUST provide a valid API key
+# Load API key from config file in examples directory
+config = configparser.ConfigParser()
+
+# Create file with API key in format shown https://docs.python.org/3/library/configparser.html
+config.read('owm-api.ini')
+
+owm = pyowm.OWM(config['API']['OpenWeatherMap'])  # You MUST provide a valid API key in ./owm-api.ini
+
 global w
 
 class RepeatedTimer(object):

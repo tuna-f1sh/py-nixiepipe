@@ -19,7 +19,7 @@ if len(sys.argv) > 1:
     symbols = sys.argv[1:len(sys.argv)]
     print(symbols)
 else:
-    symbols = ['^FTSE', '^FTAI', '^N225', '^GDAXI']
+    symbols = ['^FTSE', '^FTAI', 'GOOG', 'AAPL', 'HL.L']
 
 while(True): 
     for symbol in symbols:
