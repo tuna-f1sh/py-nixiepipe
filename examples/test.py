@@ -2,6 +2,7 @@ import sys
 import time
 import signal
 import nixiepipe
+import random
 
 # catch ctrl-c to gracefully close
 def sigint_handler(signum, frame):
@@ -20,7 +21,8 @@ pipe.setNumberUnits(0)
 pipe.setColour(255,255,255)
 pipe.setPipeColour(0,255,128,0)
 
-for num in range(0,9999):
-    pipe.setNumber(num)
+while(True):
+    pipe.setNumber(random.randint(0,9999))
+    pipe.setColour(random.randint(0,255),random.randint(0,255),random.randint(0,255))
     pipe.show()
-    time.sleep(0.1)
+    time.sleep(0.5)
