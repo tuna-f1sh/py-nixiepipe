@@ -151,9 +151,9 @@ class pipe:
 
         if port == 0:
             port = _findPipePort()
-        self.ser = serial.Serial(port,PIPEBAUD,timeout=1)
-        # Wait for boot
-        time.sleep(0.1)
+        self.ser = serial.Serial(port,PIPEBAUD,timeout=2)
+        # Wait for boot as RTS resets on new hardware
+        time.sleep(2)
 
         # Flush serial in case of junk
         self.ser.flush()
