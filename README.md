@@ -1,6 +1,6 @@
 # Nixie Pipe Python Package
 
-Python package containing *nixiepipe* class for interfacing with Nixie Pipe
+Python package containing *nixiepipe* class for interfacing with [Nixie Pipe](www.nixiepipe.com)
 Master hardware.
 
 ## Dependancies
@@ -49,3 +49,9 @@ with the contents:
 [API]
 OpenWeatherMap = YOUR_API_KEY
 ```
+
+# License and Attribution
+
+[![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=CFA7TQXNFURLQ)
+
+Licensed under GPL 3.0. I many of my projects open source so others can learn as I have but please attribute my creations if you derive use of them in your own work, by following the license terms, linking to www.jbrengineering.co.uk and/or the project page.
