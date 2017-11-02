@@ -26,7 +26,7 @@ classifiers = ['Development Status :: 4 - Beta',
                'Topic :: System :: Hardware']
 
 setup(name		= 'nixiepipe',
-        version		= '1.0.0',
+        version		= '1.1.0',
         author		= 'John Whittington',
         author_email	= 'john@jbrengineering.co.uk',
         description	= 'Nixie Pipe serial driver',

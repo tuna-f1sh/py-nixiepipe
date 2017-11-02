@@ -60,7 +60,7 @@ def _findPipePort():
 
 class pipe:
     """Nixie Pipe class
-    
+
     Args:
         port (str): Port Nixie Pipe is connected to. Defaults to autofind using USB device descriptors.
     """
@@ -78,6 +78,8 @@ class pipe:
             "connect" : 0x48,
             "setNumberUnits" : 0x49,
             "show" : 0x50,
+            "setWeather" : 0x51,
+            "setTime" : 0x52,
     }
     _units = {
             "Volts" : 0,
@@ -196,7 +198,7 @@ class pipe:
 
         Args:
             length (int): Length of expected return message (bytes)
-        
+
         """
 
         res = self.ser.read(length+2)
@@ -204,7 +206,7 @@ class pipe:
 
         if self.debug:
             print(res)
-        
+
         return res
 
     def _valueToMessage(self,value):
@@ -220,8 +222,8 @@ class pipe:
 
     def _messageToValue(self,message):
         """Convert message packet to uint32"""
-        
-        value = 0 
+
+        value = 0
 
         for x in range(0,3):
             value += (message[x] & 0xFF) << (8 * x)
@@ -230,7 +232,7 @@ class pipe:
 
     def connect(self):
         """Connect to the Nixie Pipe Master. Used by class initialiser to confirm Nixie Pipe connected
-        
+
         Returns:
             Firmware version number (float) if connection sucessful, otherwise -1.
         """
@@ -301,7 +303,7 @@ class pipe:
 
         self._sendCommand(self._commands["clear"],1,1)
         res = self._getResponce(1)
-    
+
     def clearPipe(self,pipe):
         """Clear individual (pipe) Nixie Pipe (set black)"""
 
@@ -310,7 +312,7 @@ class pipe:
 
     def setBrightness(self, value):
         """Set Nixie Pipe array brightness (off) 0-255 (bright)"""
-        
+
         self._sendCommand(self._commands["brightness"],value & 0xFF,1)
         res = self._getResponce(1)
 
@@ -332,21 +334,51 @@ class pipe:
             return -1
 
     def setWeather(self, pipe, symbol):
-        """Set Nixie Pipe Weather unit (pipe) with (symbol). 
-        
+        """Set Nixie Pipe Weather unit (pipe) with (symbol).
+
         Args:
             symbol (str): A string corresponding to the icon to set or Open Weather Map iocon code.
         """
-        
+
         symbol = symbol.capitalize()
 
         index = self._weather[symbol]
-        
+
         self.setPipeNumber(pipe,index)
+
+    def sendWeather(self, temp, symbol, humidity, wind):
+        """Send weather data to Nixie Pipe.
+
+        Args:
+            temp (int): The outside temperature
+            symbol (str): A string corresponding to the icon to set or Open Weather Map iocon code.
+            humidity (int): The outside relative humidity
+            wind (int): The outside wind speed
+        """
+
+        symbol = symbol.capitalize()
+        temp = int(round(temp)) # can only print ints
+        humidity = int(round(humidity)) # can only print ints
+        wind = int(round(wind)) # can only print ints
+
+        index = self._weather[symbol]
+
+        self._sendCommand(self._commands["setWeather"], [temp, index, wind, humidity], 4)
+        res = self._getResponce(1)
+
+    def sendTime(self, hours, minutes):
+        """Send time to Nixie Pipe, to set RTC.
+
+        Args:
+            hours (int): Hours to set
+            wind (int): Minutes to set
+        """
+        self._sendCommand(self._commands["setTime"], [hours, minutes], 2)
+        res = self._getResponce(1)
 
     def show(self):
         """Write and show changes to Nixie Pipe array
-        
+
         Must be called after setting commands to view changes. Call disables interrupts to write LEDs so a delay is inforced by waiting for the responce.
         """
 
