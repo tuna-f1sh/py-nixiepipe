@@ -1,4 +1,5 @@
 import sys
+import os
 import time
 import signal
 import nixiepipe
@@ -11,9 +12,9 @@ import datetime
 config = configparser.ConfigParser()
 
 # Create file with API key in format shown https://docs.python.org/3/library/configparser.html
-config.read('owm-api.ini')
+config.read(os.path.join(os.path.abspath(os.path.dirname(__file__)), 'owm-api.ini'))
 
-owm = pyowm.OWM(config['API']['OpenWeatherMap'])  # You MUST provide a valid API key in ./owm-api.ini
+owm = pyowm.OWM(config['API']['OpenWeatherMap'])  # You MUST provide a valid API key in owm-api.ini in same folder as script
 
 global w
 
