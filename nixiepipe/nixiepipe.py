@@ -333,6 +333,20 @@ class pipe:
         else:
             return -1
 
+    def setUnit(self, pipe, symbol):
+        symbol = symbol.capitalize()
+
+        index = self._units[symbol]
+
+        self.setPipeNumber(pipe,index)
+
+    def setPrefix(self, pipe, symbol):
+        symbol = symbol.capitalize()
+
+        index = self._prefix[symbol]
+
+        self.setPipeNumber(pipe,index)
+
     def setWeather(self, pipe, symbol):
         """Set Nixie Pipe Weather unit (pipe) with (symbol).
 
